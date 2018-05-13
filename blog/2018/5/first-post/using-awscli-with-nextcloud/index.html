@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/sticky-footer.css" rel="stylesheet">
+    <title>Using AWSCLI with Nextcloud — ushills.github.io</title>
+</head>
+
+<!--- Page Content --->
+<body>
+<div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>ushills.github.io</h1>
+</div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="nav navbar-nav">
+        <li><a class="navbar-brand" href="../../../../../">Welcome</a></li>
+        
+          <li class="active"><a class="nav-link" href="../../../../../blog/">Blog</a></li>
+        
+          <li><a class="nav-link" href="../../../../../projects/">Projects</a></li>
+        
+          <li><a class="nav-link" href="../../../../../about/">About</a></li>
+        
+      </ul>
+    </nav>
+
+<main role="main" class="container" style="margin-top:30px">
+    
+  <h2>Using AWSCLI with Nextcloud</h2>
+  <p>Amazon s3 is a cheap and secure place to store files and therefore ideal for off-site secure backups.</p>
+<p>There is a convenient python command line interface for linux that you can install with the following.</p>
+<pre><code>sudo pip install awscli
+</code></pre>
+<p>Go to IAM Management Console and create a new user and create access keys</p>
+<pre><code>sudo aws configure
+
+AWS Access Key ID [None]: {enter access key}
+AWS Secret Access Key [None]: {enter secret key}
+Default region name [None]: eu-west-1
+Default output format [None]:
+</code></pre>
+<p>To list your buckets use</p>
+<pre><code>sudo aws s3 ls
+</code></pre>
+<p>Now create a script that you can call to backup your files to AWS s3.  I use the example below, and store the script in /etc/s3backup/</p>
+<pre><code>sudo nano s3_backup_nextcloud.sh
+
+#!/bin/bash
+ocdatapath='/var/www/owncloud/data'
+s3backuppath='s3://{s3 bucket name for backup}'
+day=`date +%Y-%m-%d:%H:%M:%S`
+echo 'Starting s3 backup for' ${day}
+
+#command to backup to s3 server
+#exclude the tmp directory and .* files
+aws s3 sync ${ocdatapath} ${s3backuppath} --exclude "/tmp" --exclude "updater-backup" --exclude "lost+found" --exclude ".*" --exclude "~*" --acl private --sse &gt; /var/log/s3backup_${day}.log
+</code></pre>
+<p>Note that the suffix -sse adds server side encryption to all uploaded files and therefore keeps your files secure but easily accessible without the need to store encryption keys and the logs of each backup are maintained under /var/log/s3backup_date.log.</p>
+<p>Finally, make sure to make it executable with</p>
+<pre><code>sudo chmod +x /etc/s3backup/s3_backup_nextcloud.sh
+</code></pre>
+<p>I have a crontab with the following which runs the backup every 6 hours.</p>
+<pre><code>0 0,6,12,18 * * * /etc/s3backup/s3_backup_nextcloud.sh
+</code></pre>
+
+
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">&copy; Copyright 2018 by ushills.</span>
+    </div>
+</footer>
+
+
+<!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+</body>
+</html>
