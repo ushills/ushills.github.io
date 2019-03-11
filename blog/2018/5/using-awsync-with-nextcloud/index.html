@@ -10,6 +10,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/sticky-footer.css" rel="stylesheet">
+    <link href="/static/custom-css.css" rel="stylesheet">
     <title>Using AWSCLI with Nextcloud — ushills.co.uk</title>
 </head>
 
@@ -41,46 +42,47 @@
   <p class="text-muted">
     written by
     
-      ushills
+      <a href="https://twitter.com/ushills_co_uk">ushills</a>
     
     on 2018-05-13
   </p>
   <p>Amazon s3 is a cheap and secure place to store files and therefore ideal for off-site secure backups.</p>
-<p>There is a convenient python command line interface for linux that you can install with the following.</p>
-<pre><code class="lang-console">sudo pip install awscli
-</code></pre>
-<p>Go to IAM Management Console and create a new user and create access keys</p>
-<pre><code>sudo aws configure
+<p>There is a convenient python command line interface for linux that you can install with the following.
+console</p>
+<pre class="bash">sudo pip install awscli</pre><p>Go to IAM Management Console and create a new user and create access keys</p>
+<pre class="bash">
+sudo aws configure
 
 AWS Access Key ID [None]: {enter access key}
 AWS Secret Access Key [None]: {enter secret key}
 Default region name [None]: eu-west-1
-Default output format [None]:
-</code></pre>
-<p>To list your buckets use</p>
-<pre><code>sudo aws s3 ls
-</code></pre>
-<p>Now create a script that you can call to backup your files to AWS s3.  I use the example below, and store the script in /etc/s3backup/</p>
-<pre><code class="lang-console">sudo nano s3_backup_nextcloud.sh
+Default output format [None]: 
+</pre><p>To list your buckets use</p>
+<pre class="bash">
+sudo aws s3 ls
+</pre><p>Now create a script that you can call to backup your files to AWS s3.  I use the example below, and store the script in /etc/s3backup/</p>
+<pre class="bash">
+sudo nano s3_backup_nextcloud.sh
 
 #!/bin/bash
-ocdatapath=&#39;/var/www/owncloud/data&#39;
-s3backuppath=&#39;s3://{s3 bucket name for backup}&#39;
+ocdatapath='/var/www/owncloud/data'
+s3backuppath='s3://{s3 bucket name for backup}'
 day=`date +%Y-%m-%d:%H:%M:%S`
-echo &#39;Starting s3 backup for&#39; ${day}
+echo 'Starting s3 backup for' ${day}
 
 #command to backup to s3 server
 #exclude the tmp directory and .* files
-aws s3 sync ${ocdatapath} ${s3backuppath} --exclude &quot;/tmp&quot; --exclude &quot;updater-backup&quot; --exclude &quot;lost+found&quot; --exclude &quot;.*&quot; --exclude &quot;~*&quot; --acl private --sse &gt; /var/log/s3backup_${day}.log
-</code></pre>
-<p>Note that the suffix -sse adds server side encryption to all uploaded files and therefore keeps your files secure but easily accessible without the need to store encryption keys and the logs of each backup are maintained under /var/log/s3backup_date.log.</p>
-<p>Finally, make sure to make it executable with</p>
-<pre><code>sudo chmod +x /etc/s3backup/s3_backup_nextcloud.sh
-</code></pre>
-<p>I have a crontab with the following which runs the backup every 6 hours.</p>
-<pre><code>0 0,6,12,18 * * * /etc/s3backup/s3_backup_nextcloud.sh
-</code></pre>
+aws s3 sync ${ocdatapath} ${s3backuppath} --exclude "/tmp" --exclude "updater-backup" --exclude "lost+found" --exclude ".*" --exclude "~*" --acl private --sse > /var/log/s3backup_${day}.log 
+</pre><p>Note that the suffix -sse adds server-side encryption to all uploaded files and therefore keeps your files secure but easily accessible without the need to store encryption keys and the logs of each backup are maintained under /var/log/s3backup_date.log.</p>
+<p>Finally, make sure to make it executable with:</p>
+<pre class="bash">
+sudo chmod +x /etc/s3backup/s3_backup_nextcloud.sh
+</pre>
+I have a crontab with the following which runs the backup every 6 hours.
 
+<pre class="bash">
+0 0,6,12,18 * * * /etc/s3backup/s3_backup_nextcloud.sh
+</pre>
 
   
   </div>

@@ -1,0 +1,10 @@
+/* custom css styles
+-------------------------------------------------- */
+
+pre.bash {
+ background-color: black;
+ color: silver;
+ padding: 2px 5px 2px 5px;
+ font-family: Consolas,Monaco,Lucida Console,Liberation Mono,
+    DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    }

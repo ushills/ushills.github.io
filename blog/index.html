@@ -10,6 +10,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/sticky-footer.css" rel="stylesheet">
+    <link href="/static/custom-css.css" rel="stylesheet">
     <title>Blog — ushills.co.uk</title>
 </head>
 
@@ -37,51 +38,114 @@
     
   <div class="blog-post">
   
+    <h2><a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/" class="text-dark">Installing Nextcloud with Nextcloud-Snap</a></h2>
+  
+  <p class="text-muted">
+    written by
+    
+      <a href="https://twitter.com/ushills_couk">ushills</a>
+    
+    on 2019-03-10
+  </p>
+  <p>Following on from my previous post, this time when I upgraded my hardware to run Nextcloud I installed <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/&#34;https:/github.com/nextcloud/nextcloud-snap&#34;">Nextcloud-snap</a> which is Nextcloud packaged as a <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/&#34;https:/www.canonical.com&#34;">snap</a>.</p>
+<p>For those who have not come across snaps and the <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/&#34;https:/snapcraft.io/&#34;">snappy package manager</a> before Snaps have a number of advantages.  Although introduced by <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/&#34;https:/www.canonical.com&#34;">Canonical</a> (the organisation behind <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/&#34;https:/www.ubuntu.com/&#34;">Ubuntu</a>), they generally work across the majority of Linux Distributions and are OS agnostic, i.e. the snap does not have to be compiled for different OS's, and as long as you can install the Snappy Package Manager you can install almost any snap.</p>
+<p>The other significant advantage, particularly, with a Nextcloud instance is that that the snap install not only installs Nextcloud but installs all the required dependencies in a single sandboxed environment that just works out of the box.  Also, snaps automatically upgrade and upgrades are checked daily, therefore, the nextcloud instance will always be updated to the latest stable version.</p>
+<p>Installation, once you have the Snappy Package Manager <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/&#34;https:/docs.snapcraft.io/installing-snap-on-debian/6742&#34;">installed</a>, is as simple as:</p>
+<pre class="bash">sudo snap install nextcloud</pre><p>Nextcloud-snap currently installs:</p>
+<ul>
+<li>Nextcloud 15.0.5</li>
+<li>Apache 2.4</li>
+<li>PHP 7.2</li>
+<li>MySQL 5.7</li>
+<li>Redis 4.0</li>
+<li>mDNS for network discovery</li>
+</ul>
+<p>Another advantage, and one I only realised as I changed my hardware, is that all of the snap configuration and data is contained in one folder, my my case <code>/var/snap/nextcloud</code>, which means that you can back up the folder in its entirety and restore it by copying it to a <code>/var/snap</code> folder on another machine with Nexcloud-snap installed.</p>
+<p>This self-contained approach with snaps has a major implication with backing up and restoring, especially when considered in the context of running your OS using the BTRFS filesystem, which is the subject of my next post.</p>
+
+
+  
+    <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/">Continue reading</a>
+  
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="../blog/2019/3/using-nextcloud-with-btrfs/" class="text-dark">Using Nextcloud with Odroid HC1</a></h2>
+  
+  <p class="text-muted">
+    written by
+    
+      <a href="https://twitter.com/ushills_couk">ushills</a>
+    
+    on 2019-03-09
+  </p>
+  <p>For those that do not know <a href="../blog/2019/3/using-nextcloud-with-btrfs/&#34;https:/nextcloud.com/&#34;">Nextcloud</a> is an open-source alternative to <a href="../blog/2019/3/using-nextcloud-with-btrfs/&#34;https:/www.dropbox.com&#34;">Dropbox</a> and other cloud file storage providers, that you can host yourself on a VPS or your own on-premise server.  As such only you have access to your information and the side benefit is that you learn some server administration along the way.</p>
+<p>I have been using Nextcloud for a number of years now on a Raspberry Pi and although I was happy with the performance the Raspberry Pi is slightly limited with disk access speed due to only having USB 2.0 connections.</p>
+<p>While searching for a replacement I came across the <a href="../blog/2019/3/using-nextcloud-with-btrfs/&#34;https:/www.hardkernel.com/shop/odroid-hc1-home-cloud-one/&#34;">Odroid HC1</a> which is designed to work as a home server.  The Odroid HC1 comes with a SATA connection to connect to an internal 2.5' hard drive and has plenty of horsepower with Samsung Exynos5422 ARM® Cortex™-A15 Quad 2.0GHz/Cortex™-A7 Quad 1.4GHz, 2GB of DDR3 Ram and a large heat sink on the bottom.</p>
+<p><img src="../blog/2019/3/using-nextcloud-with-btrfs/hc1.png" alt="alt text" title="Odroid Home Cloud 1"></p>
+<p>With the native SATA connection and Gigabit Ethernet, the HC1 is a significant upgrade over the Raspberry Pi and is equivalent to most VPS.  I have a hard disk drive connected to mine but you could just as easily use an SSD.</p>
+<p>Having used many different operating systems on <a href="../blog/2019/3/using-nextcloud-with-btrfs/&#34;https:/en.wikipedia.org/wiki/Single-board_computer&#34;">single board computers</a> (SBC) in the past, this SBC is well supported by <a href="../blog/2019/3/using-nextcloud-with-btrfs/&#34;https:/www.armbian.com/&#34;">Armbian</a> which is a version of <a href="../blog/2019/3/using-nextcloud-with-btrfs/&#34;https:/www.debian.org/&#34;">Debian</a>, however, other OS's such as <a href="../blog/2019/3/using-nextcloud-with-btrfs/&#34;https:/dietpi.com/&#34;">DietPi</a> amongst others are also useable.</p>
+<p>In my next post, I will explain how I installed Nextcloud and some of the important choices I made to improve the resilience of this self-hosted installation.</p>
+
+
+  
+    <a href="../blog/2019/3/using-nextcloud-with-btrfs/">Continue reading</a>
+  
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
     <h2><a href="../blog/2018/5/using-awsync-with-nextcloud/" class="text-dark">Using AWSCLI with Nextcloud</a></h2>
   
   <p class="text-muted">
     written by
     
-      ushills
+      <a href="https://twitter.com/ushills_co_uk">ushills</a>
     
     on 2018-05-13
   </p>
   <p>Amazon s3 is a cheap and secure place to store files and therefore ideal for off-site secure backups.</p>
-<p>There is a convenient python command line interface for linux that you can install with the following.</p>
-<pre><code class="lang-console">sudo pip install awscli
-</code></pre>
-<p>Go to IAM Management Console and create a new user and create access keys</p>
-<pre><code>sudo aws configure
+<p>There is a convenient python command line interface for linux that you can install with the following.
+console</p>
+<pre class="bash">sudo pip install awscli</pre><p>Go to IAM Management Console and create a new user and create access keys</p>
+<pre class="bash">
+sudo aws configure
 
 AWS Access Key ID [None]: {enter access key}
 AWS Secret Access Key [None]: {enter secret key}
 Default region name [None]: eu-west-1
-Default output format [None]:
-</code></pre>
-<p>To list your buckets use</p>
-<pre><code>sudo aws s3 ls
-</code></pre>
-<p>Now create a script that you can call to backup your files to AWS s3.  I use the example below, and store the script in /etc/s3backup/</p>
-<pre><code class="lang-console">sudo nano s3_backup_nextcloud.sh
+Default output format [None]: 
+</pre><p>To list your buckets use</p>
+<pre class="bash">
+sudo aws s3 ls
+</pre><p>Now create a script that you can call to backup your files to AWS s3.  I use the example below, and store the script in /etc/s3backup/</p>
+<pre class="bash">
+sudo nano s3_backup_nextcloud.sh
 
 #!/bin/bash
-ocdatapath=&#39;/var/www/owncloud/data&#39;
-s3backuppath=&#39;s3://{s3 bucket name for backup}&#39;
+ocdatapath='/var/www/owncloud/data'
+s3backuppath='s3://{s3 bucket name for backup}'
 day=`date +%Y-%m-%d:%H:%M:%S`
-echo &#39;Starting s3 backup for&#39; ${day}
+echo 'Starting s3 backup for' ${day}
 
 #command to backup to s3 server
 #exclude the tmp directory and .* files
-aws s3 sync ${ocdatapath} ${s3backuppath} --exclude &quot;/tmp&quot; --exclude &quot;updater-backup&quot; --exclude &quot;lost+found&quot; --exclude &quot;.*&quot; --exclude &quot;~*&quot; --acl private --sse &gt; /var/log/s3backup_${day}.log
-</code></pre>
-<p>Note that the suffix -sse adds server side encryption to all uploaded files and therefore keeps your files secure but easily accessible without the need to store encryption keys and the logs of each backup are maintained under /var/log/s3backup_date.log.</p>
-<p>Finally, make sure to make it executable with</p>
-<pre><code>sudo chmod +x /etc/s3backup/s3_backup_nextcloud.sh
-</code></pre>
-<p>I have a crontab with the following which runs the backup every 6 hours.</p>
-<pre><code>0 0,6,12,18 * * * /etc/s3backup/s3_backup_nextcloud.sh
-</code></pre>
+aws s3 sync ${ocdatapath} ${s3backuppath} --exclude "/tmp" --exclude "updater-backup" --exclude "lost+found" --exclude ".*" --exclude "~*" --acl private --sse > /var/log/s3backup_${day}.log 
+</pre><p>Note that the suffix -sse adds server-side encryption to all uploaded files and therefore keeps your files secure but easily accessible without the need to store encryption keys and the logs of each backup are maintained under /var/log/s3backup_date.log.</p>
+<p>Finally, make sure to make it executable with:</p>
+<pre class="bash">
+sudo chmod +x /etc/s3backup/s3_backup_nextcloud.sh
+</pre>
+I have a crontab with the following which runs the backup every 6 hours.
 
+<pre class="bash">
+0 0,6,12,18 * * * /etc/s3backup/s3_backup_nextcloud.sh
+</pre>
 
   
     <a href="../blog/2018/5/using-awsync-with-nextcloud/">Continue reading</a>
