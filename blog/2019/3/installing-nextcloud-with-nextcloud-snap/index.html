@@ -46,11 +46,12 @@
     
     on 2019-03-10
   </p>
-  <p>Following on from my previous post, this time when I upgraded my hardware to run Nextcloud I installed <a href="https://github.com/nextcloud/nextcloud-snap">Nextcloud-snap</a> which is Nextcloud packaged as a <a href="https://www.canonical.com">snap</a>.</p>
-<p>For those who have not come across snaps and the <a href="https://snapcraft.io/">snappy package manager</a> before Snaps have a number of advantages.  Although introduced by <a href="https://www.canonical.com">Canonical</a> (the organisation behind <a href="https://www.ubuntu.com/">Ubuntu</a>), they generally work across the majority of Linux Distributions and are OS agnostic, i.e. the snap does not have to be compiled for different OS's, and as long as you can install the Snappy Package Manager you can install almost any snap.</p>
-<p>The other significant advantage, particularly, with a Nextcloud instance is that that the snap install not only installs Nextcloud but installs all the required dependencies in a single sandboxed environment that just works out of the box.  Also, snaps automatically upgrade and upgrades are checked daily, therefore, the nextcloud instance will always be updated to the latest stable version.</p>
+  <p>Following on from my previous post, this time when I upgraded my hardware, to run Nextcloud I installed <a href="https://github.com/nextcloud/nextcloud-snap">Nextcloud-snap</a> which is Nextcloud packaged as a <a href="https://www.canonical.com">snap</a>.</p>
+<p>For those who have not come across snaps and the <a href="https://snapcraft.io/">snappy package manager</a> before Snaps have a number of advantages.</p>
+<p>Although introduced by <a href="https://www.canonical.com">Canonical</a> (the organisation behind <a href="https://www.ubuntu.com/">Ubuntu</a>), they generally work across the majority of Linux Distributions and are OS agnostic, i.e. the snap does not have to be compiled for different OS's and as long as you can install the Snappy Package Manager you can install almost any snap.</p>
+<p>The other significant advantage, particularly, with a Nextcloud instance is that that the snap not only installs Nextcloud but installs all the required dependencies in a single sandboxed environment that just works out of the box.  Also, snaps automatically upgrade and upgrades are checked daily, therefore, the nextcloud instance will always be updated to the latest stable version.</p>
 <p>Installation, once you have the Snappy Package Manager <a href="https://docs.snapcraft.io/installing-snap-on-debian/6742">installed</a>, is as simple as:</p>
-<pre class="bash">sudo snap install nextcloud</pre><p>Nextcloud-snap currently installs:</p>
+<pre class="bash">sudo snap install nextcloud</pre><p>The stable Nextcloud-snap currently installs:</p>
 <ul>
 <li>Nextcloud 15.0.5</li>
 <li>Apache 2.4</li>
@@ -59,7 +60,7 @@
 <li>Redis 4.0</li>
 <li>mDNS for network discovery</li>
 </ul>
-<p>Another advantage, and one I only realised as I changed my hardware, is that all of the snap configuration and data is contained in one folder, my my case <code>/var/snap/nextcloud</code>, which means that you can back up the folder in its entirety and restore it by copying it to a <code>/var/snap</code> folder on another machine with Nexcloud-snap installed.</p>
+<p>Another advantage, and one I only recently realised, is that all of the snap configuration and data is contained in one folder, my my case <code>/var/snap/nextcloud</code>, which means that you can back up the folder in its entirety and restore it by copying it to a <code>/var/snap</code> folder on another machine with Nexcloud-snap installed or restore a backup in place without having MySQL database issues or other issues with interdependancies.</p>
 <p>This self-contained approach with snaps has a major implication with backing up and restoring, especially when considered in the context of running your OS using the BTRFS filesystem, which is the subject of my next post.</p>
 
 
