@@ -60,8 +60,23 @@
 <li>Redis 4.0</li>
 <li>mDNS for network discovery</li>
 </ul>
-<p>Another advantage, and one I only recently realised, is that all of the snap configuration and data is contained in one folder, my my case <code>/var/snap/nextcloud</code>, which means that you can back up the folder in its entirety and restore it by copying it to a <code>/var/snap</code> folder on another machine with Nexcloud-snap installed or restore a backup in place without having MySQL database issues or other issues with interdependancies.</p>
-<p>This self-contained approach with snaps has a major implication with backing up and restoring, especially when considered in the context of running your OS using the BTRFS filesystem, which is the subject of my next post.</p>
+<h3>Install Snap</h3>
+<p>Then install snap, using the guide <a href="https://docs.snapcraft.io/installing-snapd/6735">here</a> for your installation, for Debian and other APT based distributions this is.</p>
+<pre class="bash">
+$ sudo apt update
+$ sudo apt install snapd
+</pre><h3>Install Nextcloud-snap</h3>
+<p>Finally, once you have snap the command to install Nextcloud-snap is universal with.</p>
+<pre class="bash">
+$ sudo snap install nextcloud
+</pre><p>Follow the <a href="https://github.com/nextcloud/nextcloud-snap#configuration">configuration guide</a>, although not a great deal of configuration is required and it will work out of the box, the essential settings I change are:</p>
+<pre class="bash">
+sudo snap run nextcloud.occ enable-https lets-encrypt
+sudo snap set nextcloud php.memory-limit=1512M
+</pre><p>The above enables HTTPS and provisions a <a href="https://letsencrypt.org/">Lets-Encrypt</a> certificate for your Nextcloud webserver and increases the memory available from the default 512Mb to 1.5Gb of the 2GB available on the <a href="../../../../blog/2019/3/using-nextcloud-with-btrfs/">Odroid HC1</a>.</p>
+<h3>Snap advantages</h3>
+<p>advantage, and one I only recently realised, is that all of the snap configuration and data is contained in one folder, my my case <code>/var/snap/nextcloud</code>, which means that you can back up the folder in its entirety and restore it by copying it to a <code>/var/snap</code> folder on another machine with Nexcloud-snap installed or restore a backup in place without having MySQL database issues or other issues with interdependancies.</p>
+<p>This self-contained approach with snaps has a major implication with backing up and restoring, especially when considered in the context of running your OS using the BTRFS filesystem, which is the subject of my <a href="../../../../blog/2019/3/nextcloud-snap-and-btrfs/">next post</a>.</p>
 
 
   
