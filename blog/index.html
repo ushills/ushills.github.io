@@ -23,7 +23,7 @@
       <ul class="nav navbar-nav">
         <li><a class="navbar-brand" href="../">Welcome</a></li>
         
-          <li class="active"><a class="nav-link" href="../blog/">Blog</a></li>
+          <li class="active"><a class="nav-link" href="./">Blog</a></li>
         
           <li><a class="nav-link" href="../projects/">Projects</a></li>
         
@@ -38,7 +38,7 @@
     
   <div class="blog-post">
   
-    <h2><a href="../blog/2019/3/nextcloud-snap-and-btrfs/" class="text-dark">Nextcloud-snap and BTRFS</a></h2>
+    <h2><a href="2019/3/nextcloud-snap-and-btrfs/" class="text-dark">Nextcloud-snap and BTRFS</a></h2>
   
   <p class="text-muted">
     written by
@@ -69,7 +69,7 @@ $ sudo mv /var/tempsnap/* /var/snap/
 
 
   
-    <a href="../blog/2019/3/nextcloud-snap-and-btrfs/">Continue reading</a>
+    <a href="2019/3/nextcloud-snap-and-btrfs/">Continue reading</a>
   
   </div>
 
@@ -77,7 +77,7 @@ $ sudo mv /var/tempsnap/* /var/snap/
     
   <div class="blog-post">
   
-    <h2><a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/" class="text-dark">Installing Nextcloud with Nextcloud-Snap</a></h2>
+    <h2><a href="2019/3/installing-nextcloud-with-nextcloud-snap/" class="text-dark">Installing Nextcloud with Nextcloud-Snap</a></h2>
   
   <p class="text-muted">
     written by
@@ -113,14 +113,14 @@ $ sudo snap install nextcloud
 <pre class="bash">
 sudo snap run nextcloud.occ enable-https lets-encrypt
 sudo snap set nextcloud php.memory-limit=1512M
-</pre><p>The above enables HTTPS and provisions a <a href="https://letsencrypt.org/">Lets-Encrypt</a> certificate for your Nextcloud webserver and increases the memory available from the default 512Mb to 1.5Gb of the 2GB available on the <a href="../blog/2019/3/using-nextcloud-with-btrfs/">Odroid HC1</a>.</p>
+</pre><p>The above enables HTTPS and provisions a <a href="https://letsencrypt.org/">Lets-Encrypt</a> certificate for your Nextcloud webserver and increases the memory available from the default 512Mb to 1.5Gb of the 2GB available on the <a href="2019/3/using-nextcloud-with-btrfs/">Odroid HC1</a>.</p>
 <h3>Snap advantages</h3>
 <p>advantage, and one I only recently realised, is that all of the snap configuration and data is contained in one folder, my my case <code>/var/snap/nextcloud</code>, which means that you can back up the folder in its entirety and restore it by copying it to a <code>/var/snap</code> folder on another machine with Nexcloud-snap installed or restore a backup in place without having MySQL database issues or other issues with interdependancies.</p>
-<p>This self-contained approach with snaps has a major implication with backing up and restoring, especially when considered in the context of running your OS using the BTRFS filesystem, which is the subject of my <a href="../blog/2019/3/nextcloud-snap-and-btrfs/">next post</a>.</p>
+<p>This self-contained approach with snaps has a major implication with backing up and restoring, especially when considered in the context of running your OS using the BTRFS filesystem, which is the subject of my <a href="2019/3/nextcloud-snap-and-btrfs/">next post</a>.</p>
 
 
   
-    <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/">Continue reading</a>
+    <a href="2019/3/installing-nextcloud-with-nextcloud-snap/">Continue reading</a>
   
   </div>
 
@@ -128,7 +128,7 @@ sudo snap set nextcloud php.memory-limit=1512M
     
   <div class="blog-post">
   
-    <h2><a href="../blog/2019/3/using-nextcloud-with-btrfs/" class="text-dark">Using Nextcloud with Odroid HC1</a></h2>
+    <h2><a href="2019/3/using-nextcloud-with-btrfs/" class="text-dark">Using Nextcloud with Odroid HC1</a></h2>
   
   <p class="text-muted">
     written by
@@ -140,14 +140,14 @@ sudo snap set nextcloud php.memory-limit=1512M
   <p>For those that do not know <a href="https://nextcloud.com/">Nextcloud</a> is an open-source alternative to <a href="https://www.dropbox.com">Dropbox</a>, that you can host yourself on a Virtual Private Server (VPS), like Amazon EC2,  Digital Ocean Droplets or your own on-premise server.  As such not only do only you have access to your information (enhanced privacy) but the side benefit is that you learn some server administration along the way.</p>
 <p>I have been using Nextcloud for a number of years now on a Raspberry Pi 3 and although I was happy with the performance, the Raspberry Pi is slightly limited with disk access speed due to only having USB 2.0 connections.</p>
 <p>While searching for a replacement I came across the <a href="https://www.hardkernel.com/shop/odroid-hc1-home-cloud-one/">Odroid HC1</a> which is designed to work as a home server.  The Odroid HC1 comes with a SATA connection to connect to an internal 2.5' hard drive and has plenty of horsepower with Eight Cores (Samsung Exynos5422 ARM® Cortex™-A15 Quad 2.0GHz/Cortex™-A7 Quad 1.4GHz), 2GB of DDR3 Ram and a large heat sink on the bottom. I have a hard disk drive connected to mine but you could just as easily use an SSD.</p>
-<p><img src="../blog/2019/3/using-nextcloud-with-btrfs/hc1.png" alt="alt text" title="Odroid Home Cloud 1"></p>
+<p><img src="2019/3/using-nextcloud-with-btrfs/hc1.png" alt="alt text" title="Odroid Home Cloud 1"></p>
 <p>With the native SATA connection and Gigabit Ethernet, the HC1 is a significant upgrade over the Raspberry Pi (even the 3B+) and is equivalent to most VPS.</p>
 <p>Having used many different operating systems on <a href="https://en.wikipedia.org/wiki/Single-board_computer">single board computers</a> (SBC) in the past, this SBC is well supported by <a href="https://www.armbian.com/">Armbian</a> which is a fork of <a href="https://www.debian.org/">Debian</a>, however, other OS's such as <a href="https://dietpi.com/">DietPi</a> and others are also available and stable.</p>
-<p>In my <a href="../blog/2019/3/installing-nextcloud-with-nextcloud-snap/">next post</a>, I will explain how I installed Nextcloud and some of the important choices I made to improve the resilience of this self-hosted installation.</p>
+<p>In my <a href="2019/3/installing-nextcloud-with-nextcloud-snap/">next post</a>, I will explain how I installed Nextcloud and some of the important choices I made to improve the resilience of this self-hosted installation.</p>
 
 
   
-    <a href="../blog/2019/3/using-nextcloud-with-btrfs/">Continue reading</a>
+    <a href="2019/3/using-nextcloud-with-btrfs/">Continue reading</a>
   
   </div>
 
@@ -155,7 +155,7 @@ sudo snap set nextcloud php.memory-limit=1512M
     
   <div class="blog-post">
   
-    <h2><a href="../blog/2018/5/using-awsync-with-nextcloud/" class="text-dark">Using AWSCLI with Nextcloud</a></h2>
+    <h2><a href="2018/5/using-awsync-with-nextcloud/" class="text-dark">Using AWSCLI with Nextcloud</a></h2>
   
   <p class="text-muted">
     written by
@@ -203,7 +203,7 @@ I have a crontab with the following which runs the backup every 6 hours.
 </pre>
 
   
-    <a href="../blog/2018/5/using-awsync-with-nextcloud/">Continue reading</a>
+    <a href="2018/5/using-awsync-with-nextcloud/">Continue reading</a>
   
   </div>
 
