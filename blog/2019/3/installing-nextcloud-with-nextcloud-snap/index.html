@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="/static/sticky-footer.css" rel="stylesheet">
+  <link href="/static/custom-css.css" rel="stylesheet">
+  <title>Installing Nextcloud with Nextcloud-Snap — ushills.co.uk</title>
+</head>
+
+<!--- Page Content --->
+
+<body>
+  <div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>ushills.co.uk</h1>
+  </div>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="nav navbar-nav">
+      <li><a class="navbar-brand" href="../../../../">Welcome</a>
+        </li>
+        
+        <li class="active" ><a class="nav-link" href="../../../">Blog</a></li>
+          
+        <li><a class="nav-link" href="../../../../projects/">Projects</a></li>
+          
+        <li><a class="nav-link" href="../../../../about/">About</a></li>
+          
+    </ul>
+  </nav>
+
+  <main role="main" class="container" style="margin-top:30px">
+    
+  
+  <div class="blog-post">
+  
+    <h2>Installing Nextcloud with Nextcloud-Snap</h2>
+  
+  <p class="text-muted">
+    written by
+    
+      <a href="https://twitter.com/ushills_couk">ushills</a>
+    
+    on 2019-03-10
+  </p>
+  <p>Following on from my previous post, this time when I upgraded my hardware, to run Nextcloud I installed <a href="https://github.com/nextcloud/nextcloud-snap">Nextcloud-snap</a> which is Nextcloud packaged as a <a href="https://www.canonical.com">snap</a>.</p>
+<p>For those who have not come across snaps and the <a href="https://snapcraft.io/">snappy package manager</a> before Snaps have a number of advantages.</p>
+<p>Although introduced by <a href="https://www.canonical.com">Canonical</a> (the organisation behind <a href="https://www.ubuntu.com/">Ubuntu</a>), they generally work across the majority of Linux Distributions and are OS agnostic, i.e. the snap does not have to be compiled for different OS's and as long as you can install the Snappy Package Manager you can install almost any snap.</p>
+<p>The other significant advantage, particularly, with a Nextcloud instance is that that the snap not only installs Nextcloud but installs all the required dependencies in a single sandboxed environment that just works out of the box.  Also, snaps automatically upgrade and upgrades are checked daily, therefore, the nextcloud instance will always be updated to the latest stable version.</p>
+<p>Installation, once you have the Snappy Package Manager <a href="https://docs.snapcraft.io/installing-snap-on-debian/6742">installed</a>, is as simple as:</p>
+<pre class="bash">sudo snap install nextcloud</pre><p>The stable Nextcloud-snap currently installs:</p>
+<ul>
+<li>Nextcloud 15.0.5</li>
+<li>Apache 2.4</li>
+<li>PHP 7.2</li>
+<li>MySQL 5.7</li>
+<li>Redis 4.0</li>
+<li>mDNS for network discovery</li>
+</ul>
+<h3>Install Snap</h3>
+<p>Then install snap, using the guide <a href="https://docs.snapcraft.io/installing-snapd/6735">here</a> for your installation, for Debian and other APT based distributions this is.</p>
+<pre class="bash">
+$ sudo apt update
+$ sudo apt install snapd
+</pre><h3>Install Nextcloud-snap</h3>
+<p>Finally, once you have snap the command to install Nextcloud-snap is universal with.</p>
+<pre class="bash">
+$ sudo snap install nextcloud
+</pre><p>Follow the <a href="https://github.com/nextcloud/nextcloud-snap#configuration">configuration guide</a>, although not a great deal of configuration is required and it will work out of the box, the essential settings I change are:</p>
+<pre class="bash">
+sudo snap run nextcloud.occ enable-https lets-encrypt
+sudo snap set nextcloud php.memory-limit=1512M
+</pre><p>The above enables HTTPS and provisions a <a href="https://letsencrypt.org/">Lets-Encrypt</a> certificate for your Nextcloud webserver and increases the memory available from the default 512Mb to 1.5Gb of the 2GB available on the <a href="../using-nextcloud-with-btrfs/">Odroid HC1</a>.</p>
+<h3>Snap advantages</h3>
+<p>advantage, and one I only recently realised, is that all of the snap configuration and data is contained in one folder, my my case <code>/var/snap/nextcloud</code>, which means that you can back up the folder in its entirety and restore it by copying it to a <code>/var/snap</code> folder on another machine with Nexcloud-snap installed or restore a backup in place without having MySQL database issues or other issues with interdependancies.</p>
+<p>This self-contained approach with snaps has a major implication with backing up and restoring, especially when considered in the context of running your OS using the BTRFS filesystem, which is the subject of my <a href="../nextcloud-snap-and-btrfs/">next post</a>.</p>
+
+
+  
+  </div>
+
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">&copy; Copyright 2023 by ushills
+        <a href="https://twitter.com/ushills_couk?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+          data-show-screen-name="false" data-show-count="false">Follow @ushills_couk</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </span>
+    </div>
+  </footer>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

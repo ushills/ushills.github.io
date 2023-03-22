@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="/static/sticky-footer.css" rel="stylesheet">
+  <link href="/static/custom-css.css" rel="stylesheet">
+  <title>Using Nextcloud with Odroid HC1 — ushills.co.uk</title>
+</head>
+
+<!--- Page Content --->
+
+<body>
+  <div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>ushills.co.uk</h1>
+  </div>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="nav navbar-nav">
+      <li><a class="navbar-brand" href="../../../../">Welcome</a>
+        </li>
+        
+        <li class="active" ><a class="nav-link" href="../../../">Blog</a></li>
+          
+        <li><a class="nav-link" href="../../../../projects/">Projects</a></li>
+          
+        <li><a class="nav-link" href="../../../../about/">About</a></li>
+          
+    </ul>
+  </nav>
+
+  <main role="main" class="container" style="margin-top:30px">
+    
+  
+  <div class="blog-post">
+  
+    <h2>Using Nextcloud with Odroid HC1</h2>
+  
+  <p class="text-muted">
+    written by
+    
+      <a href="https://twitter.com/ushills_couk">ushills</a>
+    
+    on 2019-03-09
+  </p>
+  <p>For those that do not know <a href="https://nextcloud.com/">Nextcloud</a> is an open-source alternative to <a href="https://www.dropbox.com">Dropbox</a>, that you can host yourself on a Virtual Private Server (VPS), like Amazon EC2,  Digital Ocean Droplets or your own on-premise server.  As such not only do only you have access to your information (enhanced privacy) but the side benefit is that you learn some server administration along the way.</p>
+<p>I have been using Nextcloud for a number of years now on a Raspberry Pi 3 and although I was happy with the performance, the Raspberry Pi is slightly limited with disk access speed due to only having USB 2.0 connections.</p>
+<p>While searching for a replacement I came across the <a href="https://www.hardkernel.com/shop/odroid-hc1-home-cloud-one/">Odroid HC1</a> which is designed to work as a home server.  The Odroid HC1 comes with a SATA connection to connect to an internal 2.5' hard drive and has plenty of horsepower with Eight Cores (Samsung Exynos5422 ARM® Cortex™-A15 Quad 2.0GHz/Cortex™-A7 Quad 1.4GHz), 2GB of DDR3 Ram and a large heat sink on the bottom. I have a hard disk drive connected to mine but you could just as easily use an SSD.</p>
+<p><img src="hc1.png" alt="alt text" title="Odroid Home Cloud 1"></p>
+<p>With the native SATA connection and Gigabit Ethernet, the HC1 is a significant upgrade over the Raspberry Pi (even the 3B+) and is equivalent to most VPS.</p>
+<p>Having used many different operating systems on <a href="https://en.wikipedia.org/wiki/Single-board_computer">single board computers</a> (SBC) in the past, this SBC is well supported by <a href="https://www.armbian.com/">Armbian</a> which is a fork of <a href="https://www.debian.org/">Debian</a>, however, other OS's such as <a href="https://dietpi.com/">DietPi</a> and others are also available and stable.</p>
+<p>In my <a href="../installing-nextcloud-with-nextcloud-snap/">next post</a>, I will explain how I installed Nextcloud and some of the important choices I made to improve the resilience of this self-hosted installation.</p>
+
+
+  
+  </div>
+
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">&copy; Copyright 2023 by ushills
+        <a href="https://twitter.com/ushills_couk?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+          data-show-screen-name="false" data-show-count="false">Follow @ushills_couk</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </span>
+    </div>
+  </footer>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
