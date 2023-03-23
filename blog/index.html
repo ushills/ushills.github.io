@@ -68,7 +68,7 @@ $ sudo mv /var/tempsnap/* /var/snap/
 </pre><h3>Make a snapshot</h3>
 <p>Once you have a working BTRFS subvolume which you can test with:</p>
 <pre class="bash">$ sudo btrfs subvolume list /</pre><p>which should list the directory <code>/var/snap</code> as a valid subvolume, making a snapshot is as easy as:</p>
-<pre class="bash">$ sudo btrfs subvolume snapshot -r /var/snap /var/snap/BACKUP</pre><p>This creates a read-only snapshot which is an exact copy of the folder at the time the snapshot was made, with BTRFS the significant advantage is that this snapshot takes up very little additional space as only the changes between the snapshot and the original files are stored.  The unchanged files are similar to symlinks to the original files with only the changed parts of the files stored.</p>
+<pre class="bash">$sudo btrfs subvolume snapshot -r /var/snap /var/snap/BACKUP</pre><p>This creates a read-only snapshot which is an exact copy of the folder at the time the snapshot was made, with BTRFS the significant advantage is that this snapshot takes up very little additional space as only the changes between the snapshot and the original files are stored.  The unchanged files are similar to symlinks to the original files with only the changed parts of the files stored.</p>
 <p>This snapshot can be backup up with traditional backup methods i.e. rsync, cp, <a href="https://github.com/sol1/rdiff-backup">rdiff-backup</a>, <a href="https://s3tools.org/s3cmd">s3cmd</a> or similar, however, there are specific backup applications available for BTRFS that take advantage of the efficient incremental backup available with BTRFS and this is covered in my next post.</p>
 
 
@@ -228,10 +228,7 @@ I have a crontab with the following which runs the backup every 6 hours.
 
   <footer class="footer">
     <div class="container">
-      <span class="text-muted">&copy; Copyright 2023 by ushills
-        <a href="https://twitter.com/ushills_couk?ref_src=twsrc%5Etfw" class="twitter-follow-button"
-          data-show-screen-name="false" data-show-count="false">Follow @ushills_couk</a>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <span class="text-muted">&copy; Copyright 2022 by ushills
       </span>
     </div>
   </footer>
